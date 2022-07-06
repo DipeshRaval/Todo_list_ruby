@@ -1,14 +1,14 @@
 require "date"
 
 class Todo
-  def initialize(text,due_date,completed)
+  def initialize(text, due_date, completed)
     @text = text
     @due_date = due_date
     @completed = completed
   end
 
   def overdue?
-     @due_date < Date.today
+    @due_date < Date.today
   end
 
   def today?
@@ -20,17 +20,9 @@ class Todo
   end
 
   def to_displayable_string
-    if @due_date == Date.today
-      if @completed
-         "[x] #{@text}"
-      else
-         "[ ] #{@text}"
-      end
-    elsif @completed
-       "[x] #{@text} #{@due_date}"
-    else
-       "[ ] #{@text} #{@due_date}"
-    end
+    display_status = @completed ? "[x]" : "[ ]"
+    display_date = @due_date == Date.today ? "" : @due_date
+    "#{display_status} #{@text} #{display_date}"
   end
 end
 
